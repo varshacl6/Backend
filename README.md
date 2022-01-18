@@ -7,6 +7,7 @@
 6. Move the Dockerfile to root folder as there was minor path issue
 7. Basic auditing - automatically generate EnteredBy, UpdatedBy, EnteredOn, UpdatedOn (refer https://github.com/varshacl6/DemoApplication/blob/master/DemoApplication/Data/ApplicationDbContext.cs)
 8. EFCore.NamingConventions framework to map all the column names to snake_case
+9. Unit Testing using xUnit and Moq
 
 Commands:
 
@@ -17,6 +18,7 @@ Commands:
 2. Run migrations:
 
 ```dotnet ef database update```
+
 
 Note:
 
