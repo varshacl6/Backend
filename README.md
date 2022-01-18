@@ -4,6 +4,7 @@
 3. Setup basic JWT Authentication
 4. Integrate with Swagger
 5. Move the Dockerfile to root folder as there was minor path issue
+6. Basic auditing - automatically generate EnteredBy, UpdatedBy, EnteredOn, UpdatedOn
 
 Commands:
 
