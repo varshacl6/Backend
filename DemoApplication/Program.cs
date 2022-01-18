@@ -17,7 +17,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(
     options => options
         .UseSqlServer(connectionString)
-        // Optional -> uses EFCore.NamingConventions to map all the column names to camel case
+        // Optional -> uses EFCore.NamingConventions to map all the column names to snake case
         .UseSnakeCaseNamingConvention()
 );
 
