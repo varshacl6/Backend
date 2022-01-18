@@ -5,9 +5,16 @@ using DemoApplication.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((ctx, lc) => lc
+    .WriteTo.Console()
+    //TODO avoid hard coding the url
+    .WriteTo.Seq("http://localhost:5341"));
+
 
 //Connect to DB
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
