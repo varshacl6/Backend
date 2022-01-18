@@ -7,11 +7,14 @@
 
 Commands:
 
-Create migrations:
-dotnet ef migrations add <migration_name>
+1. Create migrations:
 
-Run migrations:
-dotnet ef database update
+```dotnet ef migrations add <migration_name>```
+
+2. Run migrations:
+
+```dotnet ef database update```
 
 Note:
+
 This project uses ASP.NET 6 version
