@@ -1,12 +1,9 @@
-using System;
 using System.Text;
-using DemoApplication.Data;
+using DemoApplication.Context;
+using DemoApplication.Repository;
 using DemoApplication.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
 
@@ -53,6 +50,9 @@ builder.Services.AddControllers();
 // to ensure the services can be injected in the controllers
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<MovieService>();
+builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<MovieRepository>();
+builder.Services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
 
 // used in the audits to obtain username from the http context
 builder.Services.AddHttpContextAccessor();

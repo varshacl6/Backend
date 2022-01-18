@@ -21,3 +21,9 @@ Commands:
 Note:
 
 This project uses ASP.NET 6 version
+
+
+TESTING FRAMEWORK COMPARISION:
+
+1 NUnit - there is no isolation of test cases 
+2. xUnit isolates tests (same ). No [SetUp] or [TearDown]

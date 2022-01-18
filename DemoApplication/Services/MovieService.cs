@@ -1,25 +1,23 @@
-using DemoApplication.Data;
+using DemoApplication.Context;
 using DemoApplication.Entities;
 using DemoApplication.Models;
+using DemoApplication.Repository;
 
 namespace DemoApplication.Services;
 
 public class MovieService
 {
-    private readonly ApplicationDbContext _dbContext;
-    public MovieService(ApplicationDbContext dbContext)
+    private readonly MovieRepository _movieRepository;
+    public MovieService(MovieRepository movieRepository)
     {
-        _dbContext = dbContext;
+        _movieRepository = movieRepository;
     }
 
-    public Movie CreateMovie(MovieRequest movieRequest)
+    // this method is made virtual so that the _mockMovieService.Setup in Controller tests could override when mocking this function result
+    public virtual Movie CreateMovie(MovieRequest movieRequest)
     {
-        Movie newMovie = new Movie()
-        {
-            Name = movieRequest.Name
-        };
-        var savedMovieEntityEntry = _dbContext.Movies.Add(newMovie);
-        _dbContext.SaveChanges();
-        return savedMovieEntityEntry.Entity;
+        Movie newMovie = new Movie() {Name = movieRequest.Name};
+        Movie savedMovie = _movieRepository.CreateMovie(newMovie);
+        return savedMovie;
     }
 }

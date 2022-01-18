@@ -3,9 +3,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using AuthenticationPlugin;
-using DemoApplication.Data;
+using DemoApplication.Context;
 using DemoApplication.Entities;
 using DemoApplication.Models;
+using DemoApplication.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Configuration;
@@ -14,19 +15,18 @@ namespace DemoApplication.Services;
 
 public class UserService
 {
-    private readonly ApplicationDbContext _dbContext;
     private readonly AuthService _auth;
-    
-    public UserService(ApplicationDbContext dbContext, IConfiguration configuration)
+    private readonly UserRepository _userRepository;
+
+    public UserService(IConfiguration configuration, UserRepository userRepository)
     {
-        _dbContext = dbContext;
         _auth = new AuthService(configuration);
+        _userRepository = userRepository;
     }
     public User RegisterUser(RegisterUserRequest registerUserRequest)
     {
-        var existingUserWithSameUserName = _dbContext.Users
-            .SingleOrDefault(user => user.Username == registerUserRequest.Username);
-        if (existingUserWithSameUserName!=null)
+        User? existingUserWithSameUserName = _userRepository.GetUserByUserName(registerUserRequest.Username);
+        if (existingUserWithSameUserName != null)
         {
             throw new BadHttpRequestException("User with same username already exists ");
         }
@@ -39,15 +39,12 @@ public class UserService
             Password = BCrypt.Net.BCrypt.HashPassword(registerUserRequest.Password),
             Role = "Users"
         };
-        EntityEntry<User> savedUserEntity = _dbContext.Users.Add(newUser);
-        _dbContext.SaveChanges();
-        return savedUserEntity.Entity;
+        return _userRepository.CreateUser(newUser);
     }
 
     public LoginUserResponse LoginUser(LoginUserRequest loginUserRequest)
     {
-        var userByUserName = _dbContext.Users
-            .SingleOrDefault(user => user.Username == loginUserRequest.Username);
+        User? userByUserName = _userRepository.GetUserByUserName(loginUserRequest.Username);
         if (userByUserName == null|| !BCrypt.Net.BCrypt.Verify(loginUserRequest.Password, userByUserName.Password))
         {
             throw new UnauthorizedAccessException("Forbidden");
@@ -57,14 +54,14 @@ public class UserService
             new Claim(JwtRegisteredClaimNames.UniqueName, loginUserRequest.Username)
         };
         var token = _auth.GenerateAccessToken(claims);
-       return new LoginUserResponse()
-        {
-            accessToken = token.AccessToken,
-            expiresIn = token.ExpiresIn,
-            tokenType = token.TokenType,
-            creationTime = token.ValidFrom,
-            expirationTime = token.ValidTo,
-            username = loginUserRequest.Username
-        };
+        return new LoginUserResponse()
+            {
+                accessToken = token.AccessToken,
+                expiresIn = token.ExpiresIn,
+                tokenType = token.TokenType,
+                creationTime = token.ValidFrom,
+                expirationTime = token.ValidTo,
+                username = loginUserRequest.Username
+            };
     }
 }

@@ -3,12 +3,11 @@ using DemoApplication.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
-namespace DemoApplication.Data;
+namespace DemoApplication.Context;
 
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
   private readonly IHttpContextAccessor _httpContextAccessor;
-
   public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IHttpContextAccessor httpContextAccessor) : base(options)
   {
     _httpContextAccessor = httpContextAccessor;
