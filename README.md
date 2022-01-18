@@ -4,3 +4,11 @@
 3. Setup basic JWT Authentication
 4. Integrate with Swagger
 5. Move the Dockerfile to root folder as there was minor path issue
+
+Commands:
+
+Create migrations:
+dotnet ef migrations add <migration_name>
+
+Run migrations:
+dotnet ef database update
