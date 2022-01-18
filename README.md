@@ -12,3 +12,6 @@ dotnet ef migrations add <migration_name>
 
 Run migrations:
 dotnet ef database update
+
+Note:
+This project uses ASP.NET 6 version
