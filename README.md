@@ -3,9 +3,10 @@
 2. Connect to MSSQL 
 3. Setup basic JWT Authentication
 4. Integrate with Swagger
-5. Move the Dockerfile to root folder as there was minor path issue
-6. Basic auditing - automatically generate EnteredBy, UpdatedBy, EnteredOn, UpdatedOn
-7. EFCore.NamingConventions framework to map all the column names to snake_case
+5. Entity Framework
+6. Move the Dockerfile to root folder as there was minor path issue
+7. Basic auditing - automatically generate EnteredBy, UpdatedBy, EnteredOn, UpdatedOn
+8. EFCore.NamingConventions framework to map all the column names to snake_case
 
 Commands:
 
