@@ -1,19 +1,22 @@
+using System.Configuration;
 using System.Text;
 using DemoApplication.Context;
 using DemoApplication.Repository;
 using DemoApplication.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 
+Log.Information("Starting up");
 
-var builder = WebApplication.CreateBuilder(args);
-
-builder.Host.UseSerilog((ctx, lc) => lc
-    .WriteTo.Console()
-    //TODO avoid hard coding the url
-    .WriteTo.Seq("http://localhost:5341"));
+try
+{
+    var builder = WebApplication.CreateBuilder(args);
+    builder.Host.UseSerilog(
+        (ctx, lc) => lc
+        .ReadFrom.Configuration(ctx.Configuration));
 
 
 //Connect to DB
@@ -59,6 +62,7 @@ builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<MovieService>();
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<MovieRepository>();
+builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
 
 // used in the audits to obtain username from the http context
@@ -81,7 +85,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 var app = builder.Build();
-app.UseHttpLogging();
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseRouting();
@@ -92,4 +95,14 @@ app.UseEndpoints(endpoints => {
     endpoints.MapControllers();
 });
 
+app.UseSerilogRequestLogging();
 app.Run();
+}catch (Exception ex)
+{
+    Log.Fatal(ex, "Unhandled exception");
+}
+finally
+{
+    Log.Information("Shut down complete");
+    Log.CloseAndFlush();
+}
