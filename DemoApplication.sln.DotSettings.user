@@ -7,13 +7,13 @@
     &lt;TestId&gt;xUnit::9818CEBF-DEE8-46EF-B44C-F15C4BE07BB2::net6.0::DemoApplication.Tests.Controllers.MoviesControllerTests.Test1&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a7268d55_002D03e8_002D40f5_002D815f_002D824ae93504aa/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Create a movie #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a7268d55_002D03e8_002D40f5_002D815f_002D824ae93504aa/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Create a movie #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::9818CEBF-DEE8-46EF-B44C-F15C4BE07BB2::net6.0::DemoApplication.Tests.Services.MovieServiceTests.CreateMovieServiceMethodTest&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::9818CEBF-DEE8-46EF-B44C-F15C4BE07BB2::net6.0::DemoApplication.Tests.UnitTest1&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c1038070_002D2718_002D4971_002D87d3_002D757b075900c0/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Create a movie" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c1038070_002D2718_002D4971_002D87d3_002D757b075900c0/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Create a movie" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::9818CEBF-DEE8-46EF-B44C-F15C4BE07BB2::net6.0::DemoApplication.Tests.Services.MovieServiceTests.CreateMovieServiceMethodTest&lt;/TestId&gt;
   &lt;/TestAncestor&gt;

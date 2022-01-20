@@ -8,6 +8,7 @@
 7. Basic auditing - automatically generate EnteredBy, UpdatedBy, EnteredOn, UpdatedOn (refer https://github.com/varshacl6/DemoApplication/blob/master/DemoApplication/Data/ApplicationDbContext.cs)
 8. EFCore.NamingConventions framework to map all the column names to snake_case
 9. Unit Testing using xUnit and Moq
+10. Generate Test coverage report using dotnet-reportgenerator-globaltool
 
 Commands:
 
@@ -18,6 +19,12 @@ Commands:
 2. Run migrations:
 
 ```dotnet ef database update```
+
+3. Get Coverage Report
+   1. Generate Test Reports:
+   ```dotnet test --collect:"XPlat Code Coverage"```
+   2. Generate HTML coverage report:
+   ```reportgenerator -reports:/TestResults/<Guid>/coverage.cobertura.xml -targetdir:"BuildReports/Coverage" -reporttypes:Html```
 
 
 Note:
